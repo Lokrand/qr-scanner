@@ -1,5 +1,4 @@
-import React, { useState, FC } from "react";
-import { Input } from "../UI/Input/Input";
+import React, { useState, FC, useEffect } from "react";
 import styles from "./Main.module.css";
 import QRCode from "react-qr-code";
 import { Arrow } from "../../icons/Arrow/Arrow";
@@ -23,19 +22,41 @@ export const Main: FC = () => {
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(false);
   const [popupActive, setPopupActive] = useState(false);
-  const [qrAccuracy, setQrAccuracy] = useState("H");
+  const [qrAccuracy, setQrAccuracy] = useState("M");
   const [size, setSize] = useState(256);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(url)
+      ? setError(false)
+      : setError(true);
+    // url.length === 0 && setError(false);
+  }, [url]);
+
   return (
     <section className={styles.main}>
       <h1>Enter your e-mail</h1>
-      <input
-        type="text"
-        placeholder="Enter your e-mail"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        className={styles.main__input}
-      />
-      <button onClick={() => setActive(true)}>Generate</button>
+      <div>
+        <input
+          type="text"
+          placeholder="Enter your e-mail"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          className={styles.main__input}
+        />
+        {error && <p className={styles.main__error}>Incorrect email</p>}
+      </div>
+      <button
+        className={
+          error
+            ? `${styles.main__button} ${styles.main__button_disabled}`
+            : styles.main__button
+        }
+        onClick={() => setActive(true)}
+        disabled={error && true}
+      >
+        Generate
+      </button>
       <div className={styles.main__popup}>
         <p>Accuracy of the qr code -</p>
         <div>{qrAccuracy}</div>
@@ -57,7 +78,7 @@ export const Main: FC = () => {
                   key={index}
                   quality={el}
                   onClick={() => {
-                    setQrAccuracy(el);  
+                    setQrAccuracy(el);
                     setPopupActive(false);
                   }}
                 />
@@ -66,15 +87,19 @@ export const Main: FC = () => {
           </div>
         )}
       </div>
-      {active && (
-        <QRCode
-          size={size}
-          // style={{ height: "100%", maxWidth: "100%", width: "100%" }}
-          value={url}
-          // viewBox={`0 0 512 512`}
-          level={qrAccuracy}
-        />
-      )}
+      <div className={styles.main__qrSize}>
+        <p>QR code size</p>
+        <p>{size}</p>
+        <p>x</p>
+        <p>{size}</p>
+      </div>
+      <input
+        type="range"
+        min={256}
+        max={window.screen.availWidth}
+        onChange={(e) => setSize(Number(e.target.value))}
+      />
+      {active && <QRCode size={size} value={url} level={qrAccuracy} />}
     </section>
   );
 };
