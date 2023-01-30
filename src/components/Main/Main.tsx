@@ -14,11 +14,14 @@ export const Main: FC = () => {
   const [qrAccuracy, setQrAccuracy] = useState("M");
   const [size, setSize] = useState(256);
   const [error, setError] = useState(false);
-  
+
   useEffect(() => {
-    regex.test(url)
-      ? setError(false)
-      : setError(true);
+    if (url.length > 0) {
+      regex.test(url) ? setError(false) : setError(true);
+    }
+    if (url.length === 0) {
+      setError(true);
+    }
   }, [url]);
 
   return (
