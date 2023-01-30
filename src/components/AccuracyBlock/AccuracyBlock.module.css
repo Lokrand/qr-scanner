@@ -1,0 +1,25 @@
+.accuracyBlock {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.accuracyBlock__arrow {
+  transform: rotate(-90deg);
+  transition: all 0.2s linear;
+}
+
+.accuracyBlock__arrow:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.accuracyBlock__arrow_active {
+  transform: rotate(90deg);
+}
+
+.accuracyBlock__list {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+}
