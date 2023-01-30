@@ -10,4 +10,4 @@
 2. TypeScript
 3. CSS
 
-## Протестировать проект
+## [Протестировать проект](https://lokrand.github.io/qr-scanner/)
