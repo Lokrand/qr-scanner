@@ -1,0 +1,11 @@
+.cross {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transition: opacity .2s linear;
+}
+
+.cross:hover {
+  opacity: .6;
+  cursor: pointer;
+}
