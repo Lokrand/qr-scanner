@@ -49,3 +49,17 @@
 .main__accuracy:active {
   opacity: 1;
 }
+
+.main__arrow {
+  transform: rotate(-90deg);
+  transition: all .2s linear;
+}
+
+.main__arrow:hover {
+  opacity: .6;
+  cursor: pointer;
+}
+
+.main__arrow_active {
+  transform: rotate(90deg);
+}

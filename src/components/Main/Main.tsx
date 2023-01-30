@@ -12,7 +12,11 @@ interface IAccuracy {
 }
 
 export const Accuracy: FC<IAccuracy> = ({ quality, onClick }) => {
-  return <p className={styles.main__accuracy} onClick={onClick}>{quality}</p>;
+  return (
+    <p className={styles.main__accuracy} onClick={onClick}>
+      {quality}
+    </p>
+  );
 };
 
 export const Main: FC = () => {
@@ -20,6 +24,7 @@ export const Main: FC = () => {
   const [active, setActive] = useState(false);
   const [popupActive, setPopupActive] = useState(false);
   const [qrAccuracy, setQrAccuracy] = useState("H");
+  const [size, setSize] = useState(256);
   return (
     <section className={styles.main}>
       <h1>Enter your e-mail</h1>
@@ -34,25 +39,39 @@ export const Main: FC = () => {
       <div className={styles.main__popup}>
         <p>Accuracy of the qr code -</p>
         <div>{qrAccuracy}</div>
-        <div onClick={() => setPopupActive(!popupActive)}>
+        <div
+          className={
+            popupActive
+              ? `${styles.main__arrow} ${styles.main__arrow_active}`
+              : styles.main__arrow
+          }
+          onClick={() => setPopupActive(!popupActive)}
+        >
           <Arrow />
         </div>
         {popupActive && (
           <div className={styles.main__list}>
-            {accuracy.map((el) => {
+            {accuracy.map((el, index) => {
               return (
-                <Accuracy quality={el} onClick={() => setQrAccuracy(el)} />
-              )
+                <Accuracy
+                  key={index}
+                  quality={el}
+                  onClick={() => {
+                    setQrAccuracy(el);  
+                    setPopupActive(false);
+                  }}
+                />
+              );
             })}
           </div>
         )}
       </div>
       {active && (
         <QRCode
-          size={256}
-          style={{ height: "400px", maxWidth: "400px", width: "400px" }}
+          size={size}
+          // style={{ height: "100%", maxWidth: "100%", width: "100%" }}
           value={url}
-          viewBox={`0 0 256 256`}
+          // viewBox={`0 0 512 512`}
           level={qrAccuracy}
         />
       )}
