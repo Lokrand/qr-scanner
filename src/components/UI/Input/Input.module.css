@@ -5,7 +5,6 @@
 .input__input {
   width: calc(100vw - 62px);
   min-height: 40px;
-  /* width: 100%; */
   padding: 10px;
   border-radius: 10px;
 }
