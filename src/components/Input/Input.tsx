@@ -1,25 +1,21 @@
 import React, { ChangeEvent, FC } from "react";
-import styles from "./InputLink.module.css";
+import styles from "./Input.module.css";
 
-interface IInputLink {
-  url: string;
+interface IInput {
+  value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   error: boolean;
   errorMessage: string;
+  placeholder: string;
 }
 
-export const InputLink: FC<IInputLink> = ({
-  url,
-  error,
-  onChange,
-  errorMessage,
-}) => {
+export const Input: FC<IInput> = ({ value, error, onChange, errorMessage, placeholder }) => {
   return (
     <div>
       <input
         type="text"
-        placeholder="Enter your link"
-        value={url}
+        placeholder={placeholder}
+        value={value}
         onChange={onChange}
         className={styles.input}
       />
