@@ -19,14 +19,32 @@ export const Main: FC = () => {
   return (
     <section className={styles.main}>
       <h1>Enter your link</h1>
-      <Input
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        errorMessage="Incorrect link"
-        placeholder="Enter your link"
-        validate={validateUrl}
-      />
-      <Button error={!error} onClick={() => setActive(true)} />
+      {active ? (
+        <Button
+          title="New qr-code"
+          onClick={() => {
+            setActive(false);
+          }}
+        />
+      ) : (
+        <>
+          <Input
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            errorMessage="Incorrect link"
+            placeholder="Enter your link"
+            validate={validateUrl}
+          />
+          <Button
+            error={!error}
+            title="Generate"
+            onClick={() => {
+              setActive(true);
+              setUrl("");
+            }}
+          />
+        </>
+      )}
       <AccuracyBlock qrAccuracy={qrAccuracy} setQrAccuracy={setQrAccuracy} />
       <QRsize size={size} />
       <InputRange

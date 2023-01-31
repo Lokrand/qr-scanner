@@ -2,11 +2,12 @@ import React, { FC, MouseEventHandler } from "react";
 import styles from "./Button.module.css";
 
 interface IButton {
-  error: boolean;
+  error?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  title: string;
 }
 
-export const Button: FC<IButton> = ({ error, onClick }) => {
+export const Button: FC<IButton> = ({ error = false, onClick, title }) => {
   return (
     <button
       className={
@@ -15,7 +16,7 @@ export const Button: FC<IButton> = ({ error, onClick }) => {
       onClick={onClick}
       disabled={error}
     >
-      Generate
+      {title}
     </button>
   );
 };
