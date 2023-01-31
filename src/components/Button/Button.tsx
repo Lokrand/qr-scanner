@@ -13,7 +13,7 @@ export const Button: FC<IButton> = ({ error, onClick }) => {
         error ? `${styles.button} ${styles.button_disabled}` : styles.button
       }
       onClick={onClick}
-      disabled={error && true}
+      disabled={error}
     >
       Generate
     </button>
