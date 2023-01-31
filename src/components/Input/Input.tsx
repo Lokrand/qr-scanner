@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FC } from "react";
-import { validateUrl } from "../../utils/validateUrl";
 import styles from "./Input.module.css";
 
 interface IInput {
@@ -10,10 +9,16 @@ interface IInput {
   validate: (text: string) => boolean;
 }
 
-export const Input: FC<IInput> = ({ value, onChange, errorMessage, placeholder, validate }) => {
+export const Input: FC<IInput> = ({
+  value,
+  onChange,
+  errorMessage,
+  placeholder,
+  validate,
+}) => {
   let error = false;
   if (value) error = !validate(value);
-  
+
   return (
     <div>
       <input
