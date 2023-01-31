@@ -7,7 +7,7 @@ interface IInputRange {
   max: number;
 }
 
-export const InputRange: FC<IInputRange> = ({ onChange, min=0, max=100 }) => {
+export const InputRange: FC<IInputRange> = ({ onChange, min=128, max=256 }) => {
   return (
     <input
       type="range"
