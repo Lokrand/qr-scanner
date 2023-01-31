@@ -10,10 +10,12 @@ import { validateUrl } from "../../utils/validateUrl";
 
 export const Main: FC = () => {
   const width = window.screen.availWidth;
+
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(false);
   const [qrAccuracy, setQrAccuracy] = useState("M");
   const [size, setSize] = useState(width < 500 ? 128 : 256);
+
   const error = validateUrl(url);
 
   return (

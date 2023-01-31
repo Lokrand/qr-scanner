@@ -18,7 +18,6 @@ export const Input: FC<IInput> = ({
 }) => {
   let error = false;
   if (value) error = !validate(value);
-
   return (
     <div>
       <input

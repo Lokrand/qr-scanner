@@ -10,9 +10,7 @@ interface IButton {
 export const Button: FC<IButton> = ({ error = false, onClick, title }) => {
   return (
     <button
-      className={
-        error ? `${styles.button} ${styles.button_disabled}` : styles.button
-      }
+      className={styles.button}
       onClick={onClick}
       disabled={error}
     >

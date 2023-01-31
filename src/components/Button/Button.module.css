@@ -8,25 +8,26 @@
   border: none;
 }
 
-.button_disabled {
-  background-color: grey;
-  color: #000;
-}
-
 .button:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
-.button_disabled:hover {
+.button:disabled {
+  background-color: grey;
+  color: #000;
+}
+
+.button:disabled:hover {
   opacity: 1;
   cursor: auto;
+}
+
+.button:disabled:active {
+  transform: scale(1);
 }
 
 .button:active {
   opacity: 1;
   transform: scale(1.1);
-}
-.button_disabled:active {
-  transform: scale(1);
 }
