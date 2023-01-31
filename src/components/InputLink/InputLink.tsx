@@ -1,14 +1,19 @@
-import React, { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
+import React, { ChangeEvent, FC } from "react";
 import styles from "./InputLink.module.css";
 
 interface IInputLink {
   url: string;
-  onChange: (e:ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   error: boolean;
   errorMessage: string;
 }
 
-export const InputLink: FC<IInputLink> = ({ url, error, onChange, errorMessage }) => {
+export const InputLink: FC<IInputLink> = ({
+  url,
+  error,
+  onChange,
+  errorMessage,
+}) => {
   return (
     <div>
       <input

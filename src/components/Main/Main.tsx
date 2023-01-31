@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect, ChangeEvent } from "react";
+import React, { useState, FC, useEffect } from "react";
 import styles from "./Main.module.css";
 import QRCode from "react-qr-code";
 import { QRsize } from "../QRsize/QRsize";
@@ -6,7 +6,7 @@ import { AccuracyBlock } from "../AccuracyBlock/AccuracyBlock";
 import { InputLink } from "../InputLink/InputLink";
 import { InputRange } from "../InputRange/InputRange";
 import { Button } from "../Button/Button";
-import { regex } from "../../utils/regexForLinks";
+import { validateUrl } from "../../utils/regexForLinks";
 
 export const Main: FC = () => {
   const [url, setUrl] = useState("");
@@ -17,7 +17,7 @@ export const Main: FC = () => {
 
   useEffect(() => {
     if (url.length > 0) {
-      regex.test(url) ? setError(false) : setError(true);
+      validateUrl(url) ? setError(false) : setError(true);
     }
     if (url.length === 0) {
       setError(true);
@@ -36,7 +36,7 @@ export const Main: FC = () => {
       <Button error={error} onClick={() => setActive(true)} />
       <AccuracyBlock qrAccuracy={qrAccuracy} setQrAccuracy={setQrAccuracy} />
       <QRsize size={size} />
-      <InputRange setSize={setSize} />
+      <InputRange onChange={(e) => setSize(Number(e.target.value))} />
       {active && <QRCode size={size} value={url} level={qrAccuracy} />}
     </section>
   );

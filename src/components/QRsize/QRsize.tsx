@@ -6,6 +6,8 @@ interface IQRsize {
 
 export const QRsize: FC<IQRsize> = ({ size }) => {
   return (
-    <div>QR code size: {size} x {size}</div>
+    <div>
+      QR code size: {size} x {size}
+    </div>
   );
 };

@@ -10,9 +10,7 @@ export const Button: FC<IButton> = ({ error, onClick }) => {
   return (
     <button
       className={
-        error
-          ? `${styles.button} ${styles.button_disabled}`
-          : styles.button
+        error ? `${styles.button} ${styles.button_disabled}` : styles.button
       }
       onClick={onClick}
       disabled={error && true}

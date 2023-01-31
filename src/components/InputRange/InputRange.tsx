@@ -1,18 +1,18 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { ChangeEvent, FC } from "react";
 import styles from "./InputRange.module.css";
 
 interface IInputRange {
-  setSize: Dispatch<SetStateAction<number>>;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const InputRange: FC<IInputRange> = ({ setSize }) => {
+export const InputRange: FC<IInputRange> = ({ onChange }) => {
   return (
     <input
       type="range"
       className={styles.inputRange}
       min={256}
       max={window.screen.availWidth}
-      onChange={(e) => setSize(Number(e.target.value))}
+      onChange={onChange}
     />
   );
 };
