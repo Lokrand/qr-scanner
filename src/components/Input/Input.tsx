@@ -1,15 +1,19 @@
 import React, { ChangeEvent, FC } from "react";
+import { validateUrl } from "../../utils/validateUrl";
 import styles from "./Input.module.css";
 
 interface IInput {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  error: boolean;
   errorMessage: string;
   placeholder: string;
+  validate: (text: string) => boolean;
 }
 
-export const Input: FC<IInput> = ({ value, error, onChange, errorMessage, placeholder }) => {
+export const Input: FC<IInput> = ({ value, onChange, errorMessage, placeholder, validate }) => {
+  let error = false;
+  if (value) error = !validate(value);
+  
   return (
     <div>
       <input

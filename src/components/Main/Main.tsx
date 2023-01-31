@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from "react";
+import React, { useState, FC } from "react";
 import styles from "./Main.module.css";
 import QRCode from "react-qr-code";
 import { QRsize } from "../QRsize/QRsize";
@@ -6,23 +6,15 @@ import { AccuracyBlock } from "../AccuracyBlock/AccuracyBlock";
 import { Input } from "../Input/Input";
 import { InputRange } from "../InputRange/InputRange";
 import { Button } from "../Button/Button";
-import { validateUrl } from "../../utils/regexForLinks";
+import { validateUrl } from "../../utils/validateUrl";
 
 export const Main: FC = () => {
+  const width = window.screen.availWidth;
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(false);
   const [qrAccuracy, setQrAccuracy] = useState("M");
-  const [size, setSize] = useState(256);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    if (url.length > 0) {
-      validateUrl(url) ? setError(false) : setError(true);
-    }
-    if (url.length === 0) {
-      setError(true);
-    }
-  }, [url]);
+  const [size, setSize] = useState(width < 500 ? 128 : 256);
+  const error = validateUrl(url);
 
   return (
     <section className={styles.main}>
@@ -30,14 +22,18 @@ export const Main: FC = () => {
       <Input
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        error={error}
         errorMessage="Incorrect link"
         placeholder="Enter your link"
+        validate={validateUrl}
       />
-      <Button error={error} onClick={() => setActive(true)} />
+      <Button error={!error} onClick={() => setActive(true)} />
       <AccuracyBlock qrAccuracy={qrAccuracy} setQrAccuracy={setQrAccuracy} />
       <QRsize size={size} />
-      <InputRange onChange={(e) => setSize(Number(e.target.value))} />
+      <InputRange
+        onChange={(e) => setSize(Number(e.target.value))}
+        min={width < 500 ? 128 : 256}
+        max={width < 500 ? 256 : 512}
+      />
       {active && <QRCode size={size} value={url} level={qrAccuracy} />}
     </section>
   );

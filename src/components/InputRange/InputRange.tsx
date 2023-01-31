@@ -3,15 +3,17 @@ import styles from "./InputRange.module.css";
 
 interface IInputRange {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  min: number;
+  max: number;
 }
 
-export const InputRange: FC<IInputRange> = ({ onChange }) => {
+export const InputRange: FC<IInputRange> = ({ onChange, min=0, max=100 }) => {
   return (
     <input
       type="range"
       className={styles.inputRange}
-      min={256}
-      max={window.screen.availWidth}
+      min={min}
+      max={max}
       onChange={onChange}
     />
   );
