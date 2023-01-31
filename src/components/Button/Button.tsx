@@ -1,12 +1,12 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { FC, MouseEventHandler } from "react";
 import styles from "./Button.module.css";
 
 interface IButton {
   error: boolean;
-  setActive: Dispatch<SetStateAction<boolean>>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Button: FC<IButton> = ({ error, setActive }) => {
+export const Button: FC<IButton> = ({ error, onClick }) => {
   return (
     <button
       className={
@@ -14,7 +14,7 @@ export const Button: FC<IButton> = ({ error, setActive }) => {
           ? `${styles.button} ${styles.button_disabled}`
           : styles.button
       }
-      onClick={() => setActive(true)}
+      onClick={onClick}
       disabled={error && true}
     >
       Generate

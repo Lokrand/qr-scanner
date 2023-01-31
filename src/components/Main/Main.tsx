@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from "react";
+import React, { useState, FC, useEffect, ChangeEvent } from "react";
 import styles from "./Main.module.css";
 import QRCode from "react-qr-code";
 import { QRsize } from "../QRsize/QRsize";
@@ -27,8 +27,13 @@ export const Main: FC = () => {
   return (
     <section className={styles.main}>
       <h1>Enter your link</h1>
-      <InputLink url={url} setUrl={setUrl} error={error} />
-      <Button error={error} setActive={setActive} />
+      <InputLink
+        url={url}
+        onChange={(e) => setUrl(e.target.value)}
+        error={error}
+        errorMessage="Incorrect link"
+      />
+      <Button error={error} onClick={() => setActive(true)} />
       <AccuracyBlock qrAccuracy={qrAccuracy} setQrAccuracy={setQrAccuracy} />
       <QRsize size={size} />
       <InputRange setSize={setSize} />

@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import styles from "./QRsize.module.css";
 
 interface IQRsize {
   size: number;
@@ -7,11 +6,6 @@ interface IQRsize {
 
 export const QRsize: FC<IQRsize> = ({ size }) => {
   return (
-    <div className={styles.qrSize}>
-      <p>QR code size</p>
-      <p>{size}</p>
-      <p>x</p>
-      <p>{size}</p>
-    </div>
+    <div>QR code size: {size} x {size}</div>
   );
 };
