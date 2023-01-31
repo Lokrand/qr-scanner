@@ -6,7 +6,7 @@ interface IInput {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
   placeholder: string;
-  validate: (text: string) => boolean;
+  error: boolean;
 }
 
 export const Input: FC<IInput> = ({
@@ -14,10 +14,8 @@ export const Input: FC<IInput> = ({
   onChange,
   errorMessage,
   placeholder,
-  validate,
+  error,
 }) => {
-  let error = false;
-  if (value) error = !validate(value);
   return (
     <div>
       <input
@@ -27,7 +25,9 @@ export const Input: FC<IInput> = ({
         onChange={onChange}
         className={styles.input}
       />
-      {error && <p className={styles.input__error}>{errorMessage}</p>}
+      {error && value.length > 0 && (
+        <p className={styles.input__error}>{errorMessage}</p>
+      )}
     </div>
   );
 };
