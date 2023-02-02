@@ -2,15 +2,15 @@ import React, { FC, MouseEventHandler } from "react";
 import styles from "./Button.module.css";
 
 interface IButton {
-  error?: boolean;
+  disabled?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
-  title: string;
+  children: string;
 }
 
-export const Button: FC<IButton> = ({ error = false, onClick, title }) => {
+export const Button: FC<IButton> = ({ disabled = false, onClick, children }) => {
   return (
-    <button className={styles.button} onClick={onClick} disabled={error}>
-      {title}
+    <button className={styles.button} onClick={onClick} disabled={disabled}>
+      {children}
     </button>
   );
 };

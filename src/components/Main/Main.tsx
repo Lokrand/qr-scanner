@@ -26,7 +26,7 @@ export const Main: FC = () => {
       <h1>Enter your link</h1>
       {active ? (
         <Button
-          title="New qr-code"
+          children="New qr-code"
           onClick={() => {
             setActive(false);
           }}
@@ -41,8 +41,8 @@ export const Main: FC = () => {
             error={!error}
           />
           <Button
-            error={!error}
-            title="Generate"
+            disabled={!error}
+            children="Generate"
             onClick={() => {
               setActive(true);
               setUrl("");
