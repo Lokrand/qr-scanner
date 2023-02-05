@@ -50,7 +50,7 @@ export const Main: FC = () => {
           />
         </>
       )}
-      <AccuracyBlock qrAccuracy={qrAccuracy} onClick={() => setQrAccuracy} />
+      <AccuracyBlock qrAccuracy={qrAccuracy} setQrAccuracy={setQrAccuracy} />
       <QRsize size={size} />
       <InputRange
         onChange={(e) => setSize(Number(e.target.value))}
